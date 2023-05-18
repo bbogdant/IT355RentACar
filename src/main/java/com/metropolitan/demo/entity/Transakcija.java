@@ -2,6 +2,7 @@ package com.metropolitan.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
@@ -9,6 +10,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Entity
 @Table(name = "transakcija")
 public class Transakcija {

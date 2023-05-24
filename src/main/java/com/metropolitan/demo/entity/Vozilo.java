@@ -32,8 +32,13 @@ public class Vozilo {
     @Column(name = "cena_po_danu", precision = 10, scale = 2)
     private BigDecimal cenaPoDanu;
 
+    @Column(name = "slika", length = 1000)
+    private String slika;
+
     @OneToMany(mappedBy = "vozilo")
     private Set<Rezervacija> rezervacijas = new LinkedHashSet<>();
+
+
 
 
 
@@ -47,6 +52,7 @@ public class Vozilo {
                 ", registarskaTablica='" + registarskaTablica + '\'' +
                 ", cenaPoDanu=" + cenaPoDanu +
                 ", rezervacijas=" + rezervacijas +
+                ", slikas=" + slika +
                 '}';
     }
 }

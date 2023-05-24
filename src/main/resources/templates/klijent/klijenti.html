@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Klijenti</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+
+</head>
+<body>
+<div class="container">
+    <h1 class="animate__animated animate__fadeIn">Klijenti</h1>
+
+    <table id="klijentiTable" class="table table-striped animate__animated animate__fadeIn">
+        <thead>
+        <tr>
+            <th>Ime</th>
+            <th>Password</th>
+            <th>Adresa</th>
+            <th>Broj Telefona</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="klijent : ${klijents}">
+            <td th:text="${klijent.ime}"></td>
+            <td th:text="${klijent.password}"></td>
+            <td th:text="${klijent.adresa}"></td>
+            <td th:text="${klijent.brojTelefona}"></td>
+            <td th:text="${klijent.email}"></td>
+            <td th:text="${klijent.role}"></td>
+            <td><a th:href="@{/klijenti/edit/{id}(id=${klijent.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
+            <td><a th:href="@{/klijenti/delete/{id}(id=${klijent.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+        </tr>
+        </tbody>
+        <a class="btn mt-3" th:href="@{/klijenti/signup}">Dodaj Klijenta</a>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

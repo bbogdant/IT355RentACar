@@ -11,6 +11,12 @@ public interface VoziloService {
 
     Vozilo findById(Integer voziloId);
 
+    List<Vozilo> listVozilaByMarka(String marka);
+
+
+
+    List<Vozilo> sortByPrica(List<Vozilo> vozila);
+
     Vozilo save(Vozilo vozilo);
 
     Vozilo update(Vozilo vozilo);

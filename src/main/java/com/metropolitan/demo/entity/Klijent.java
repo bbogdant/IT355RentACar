@@ -21,8 +21,8 @@ public class Klijent {
     @Column(name = "ime")
     private String ime;
 
-    @Column(name = "prezime")
-    private String prezime;
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "adresa")
     private String adresa;
@@ -45,7 +45,7 @@ public class Klijent {
         return "Klijent{" +
                 "id=" + id +
                 ", ime='" + ime + '\'' +
-                ", prezime='" + prezime + '\'' +
+                ", password='" + password + '\'' +
                 ", adresa='" + adresa + '\'' +
                 ", brojTelefona='" + brojTelefona + '\'' +
                 ", email='" + email + '\'' +

@@ -1,0 +1,66 @@
+<html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+
+
+
+
+<body>
+
+<div class="container">
+    <h1 class="animate__animated animate__fadeIn">Dostupna vozila</h1>
+
+
+    <form th:action="@{/vozila/sortiraj-po-ceni}"  method="get">
+        <button class="btn btn-primary" type="submit">Sortiraj po ceni</button>
+    </form>
+
+    <a class="btn mt-3" th:href="@{/vozila/new-form}">Dodaj Vozilo</a>
+
+    <div class="lista-vozila">
+
+        <table class="table table-striped animate__animated animate__fadeIn">
+            <thead>
+            <tr>
+                <th>Slika</th>
+                <th>Marka</th>
+                <th>Model</th>
+                <th>Godina Proizvodnje</th>
+                <th>Cena Po Danu</th>
+                <th>Registraske Tablice</th>
+            </tr>
+            </thead>
+
+        <tbody>
+
+        <tr th:each="vozilo : ${vozila}">
+           <td> <img th:src="${vozilo.slika}" alt="Slika vozila" width="150" height="100"></td>
+            <td th:text="${vozilo.marka}"></td>
+            <td th:text="${vozilo.model}"></td>
+            <td th:text="${vozilo.godinaProizvodnje}"></td>
+            <td th:text="${vozilo.cenaPoDanu} + '&euro;'"></td>
+            <td th:text="${vozilo.registarskaTablica}"></td>
+
+        </tr>
+
+        </tbody>
+        </table>
+
+
+    </div>
+</div>
+
+
+
+
+
+</body>
+
+
+
+</html>

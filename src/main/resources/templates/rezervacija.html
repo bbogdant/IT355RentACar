@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezervacije</title>
+    <!-- Uključivanje Bootstrap CSS datoteka -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Uključivanje dodatnih CSS stilova -->
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="animate__animated animate__fadeIn">Rezervacije</h1>
+
+    <div class="card mt-5 animate__animated animate__fadeIn">
+        <div class="card-header">
+            Lista rezervacija
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Email</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="rezervacija : ${rezervacije}">
+                    <td th:text="${rezervacija.klijent}"></td>
+                    <td th:text="${rezervacija.vozilo}"></td>
+                    <td th:text="${rezervacija.datumRezervacije}"></td>
+                    <td th:text="${rezervacija.pocetniDatum}"></td>
+                    <td th:text="${rezervacija.krajnjiDatum}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <a class="btn mt-3" href="/rezervacije/new">Nova rezervacija</a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Dodajte dodatne JavaScript datoteke za funkcionalnosti stranice -->
+
+</body>
+</html>

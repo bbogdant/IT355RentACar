@@ -6,6 +6,8 @@ import com.metropolitan.demo.service.VoziloService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -29,8 +31,20 @@ public class VoziloServiceImpl implements VoziloService {
     }
 
     @Override
+    public List<Vozilo> listVozilaByMarka(String marka) {
+        return voziloRepository.findByMarka(marka);
+    }
+
+
+    @Override
+    public List<Vozilo> sortByPrica(List<Vozilo> vozila) {
+        Collections.sort(vozila, Comparator.comparing(Vozilo::getCenaPoDanu));
+        return vozila;
+    }
+
+    @Override
     public Vozilo save(Vozilo vozilo) {
-        return null;
+        return voziloRepository.save(vozilo);
     }
 
     @Override

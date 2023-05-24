@@ -32,16 +32,17 @@ public class KlijentServiceImpl implements KlijentService {
 
     @Override
     public Klijent save(Klijent klijent) {
-        return null;
+        return klijentRepository.save(klijent);
     }
 
     @Override
     public Klijent update(Klijent klijent) {
-        return null;
+        return klijentRepository.save(klijent);
     }
 
     @Override
-    public void deleteById(Integer klijentId) {
+    public void deleteById(Integer id) {
+        klijentRepository.deleteById(id);
 
     }
 }

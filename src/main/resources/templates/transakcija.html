@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Prikaz transakcija</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Dodajte dodatne CSS datoteke za prilagođavanje izgleda -->
+    <style>
+        /* Dodajte prilagođene stilove */
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-4 mb-4">Prikaz transakcija</h1>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Naziv</th>
+            <!-- Dodajte dodatne kolone prema potrebi -->
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterirajte kroz listu transakcija i prikažite ih -->
+        <tr th:each="transakcija : ${transakcije}">
+            <td th:text="${transakcija.id}"></td>
+            <td th:text="${transakcija.rezervacija}"></td>
+            <td th:text="${transakcija.datumTransakcije}"></td>
+            <td th:text="${transakcija.ukupanIznos}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Dodajte dodatne JavaScript datoteke za funkcionalnosti stranice -->
+<script>
+    // Dodajte prilagođeni JavaScript kod
+</script>
+</body>
+</html>

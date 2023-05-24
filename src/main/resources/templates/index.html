@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rent a Car</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+    .footer {
+        background-color: #f8f9fa;
+        padding: 20px 0;
+        text-align: center;
+        margin: 20px;
+    }
+
+    .card{
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+        rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+        rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+        width: 300px;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .h1{
+        margin-bottom: 20px;
+    }
+</style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                                <a class="nav-link" href="/">Početna</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/vozila">Vozila</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/rezervacije">Rezervacije</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Kontakt</a>
+                            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="/pretraga/{marka}" method="get">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="marka" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+<div class="main">
+    <h1>Dostupna vozila</h1>
+
+    <form th:action="@{/sortiraj}"  method="get">
+        <button type="submit">Sortiraj po ceni</button>
+    </form>
+
+    <div class="lista-vozila">
+
+        <div class="card" th:each="vozilo : ${vozila}">
+            <img th:src="${vozilo.slika}" alt="Slika vozila" width="250" height="180">
+            <h2 th:text="${vozilo.marka}">Marka</h2>
+            <h2 th:text="${vozilo.model}">Model</h2>
+            <p th:text="${vozilo.godinaProizvodnje}">Godište</p>
+
+            <p>Cena po danu: <span th:text="${vozilo.cenaPoDanu} + '&euro;'"></span></p>
+            <p>Registrake Tablice: <span th:text="${vozilo.registarskaTablica}"></span></p>
+
+        </div>
+    </div>
+</div>
+
+<div class="lista-vozila">
+
+    <div th:each="vozilo : ${listaVozila}">
+        <img th:src="${vozilo.slika}" alt="Slika vozila" width="100" height="100">
+        <h2 th:text="${vozilo.marka}">Marka</h2>
+        <h2 th:text="${vozilo.model}">Model</h2>
+        <p th:text="${vozilo.godinaProizvodnje}">Godište</p>
+
+        <p>Cena po danu: <span th:text="${vozilo.cenaPoDanu} + '&euro;'"></span></p>
+        <p>Registrake Tablice: <span th:text="${vozilo.registarskaTablica}"></span></p>
+
+    </div>
+</div>
+
+
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <h4>O nama</h4>
+                <ul class="footer-links list-unstyled">
+                    <li><a href="#">O nama</a></li>
+                    <li><a href="#">Uslovi korištenja</a></li>
+                    <li><a href="#">Privatnost</a></li>
+                    <li><a href="#">Kontakt</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4>Kategorije</h4>
+                <ul class="footer-links list-unstyled">
+                    <li><a href="#">Kategorija 1</a></li>
+                    <li><a href="#">Kategorija 2</a></li>
+                    <li><a href="#">Kategorija 3</a></li>
+                    <li><a href="#">Kategorija 4</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4>Korisni linkovi</h4>
+                <ul class="footer-links list-unstyled">
+                    <li><a href="#">Link 1</a></li>
+                    <li><a href="#">Link 2</a></li>
+                    <li><a href="#">Link 3</a></li>
+                    <li><a href="#">Link 4</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4>Pretplatite se na naš bilten</h4>
+                <p>Prijavite se kako biste primali najnovije vijesti i ažuriranja.</p>
+                <form class="subscribe-form">
+                    <input type="email" class="form-control" placeholder="Unesite vašu e-mail adresu">
+                    <button type="submit" class="btn btn-primary">Pretplati se</button>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="footer-bottom">
+                    <p>Sva prava zadržana &copy; 2023</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+</body>
+</html>

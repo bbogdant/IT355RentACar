@@ -1,44 +1,88 @@
 package com.metropolitan.demo.controller;
 
 import com.metropolitan.demo.entity.Vozilo;
+import com.metropolitan.demo.repository.VoziloRepository;
 import com.metropolitan.demo.service.VoziloService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/vozilos")
+@Controller
 @RequiredArgsConstructor
 public class VoziloController {
 	private final VoziloService voziloService;
+	private final VoziloRepository voziloRepository;
 
-	@GetMapping
-	public ResponseEntity<List<Vozilo>> getAllVozilos() {
-		return ResponseEntity.ok(voziloService.findAll());
+	@GetMapping("/vozila")
+	public String getAllVozila(Model model) {
+		List<Vozilo> vozila = voziloService.findAll();
+		model.addAttribute("vozila", vozila);
+		return "vozilo/vozila";
 	}
 
-	@GetMapping("/{voziloId}")
-	public ResponseEntity<Vozilo> getVoziloById(@PathVariable Integer voziloId) {
-		return ResponseEntity.ok(voziloService.findById(voziloId));
+//	@GetMapping("/{voziloId}")
+//	public String getVozilaById(@PathVariable Integer voziloId, Model model) {
+//		Vozilo vozilo = voziloService.findById(voziloId);
+//		model.addAttribute("vozilo", vozilo);
+//		return "vozila";
+//	}
+
+	@GetMapping("/vozila/sortiraj-po-ceni")
+	public String sortirajPoCeni(Model model) {
+		List<Vozilo> vozila = voziloService.findAll();
+		vozila = voziloService.sortByPrica(vozila);
+		model.addAttribute("vozila", vozila);
+		return "vozilo/vozila";
+	}
+
+	@GetMapping("/vozila/search")
+	public String pronadjiVozilaPoModelu(@RequestParam("marka") String marka, Model model) {
+		List<Vozilo> vozila = (List<Vozilo>) voziloRepository.findByMarka(marka);
+		model.addAttribute("vozila", vozila);
+		return "vozilo/vozila";
+	}
+
+	@GetMapping("vozila/new-form")
+	public String showForm(Model model) {
+		Vozilo vozilo = new Vozilo();
+		model.addAttribute("vozilo", vozilo);
+		return "vozilo/dodaj-vozilo";
+	}
+
+	@PostMapping("vozila/dodaj-vozilo")
+	public String addVozilo(@Valid Vozilo vozilo, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "vozilo/dodaj-vozilo";
+		}
+
+		voziloService.save(vozilo);
+		return "redirect:/vozila";
 	}
 
 	@PostMapping
-	public ResponseEntity<Vozilo> saveVozilo(@RequestBody Vozilo vozilo) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(voziloService.save(vozilo));
+	public String saveVozila(@RequestBody Vozilo vozilo) {
+		Vozilo savedVozilo = voziloService.save(vozilo);
+
+		return "redirect:/vozila";
 	}
 
-	@PutMapping
-	public ResponseEntity<Vozilo> updateVozilo(@RequestBody Vozilo vozilo) {
-		return ResponseEntity.ok(voziloService.update(vozilo));
+	@PutMapping("/saveKlijent")
+	public String updateVozilo(@RequestBody Vozilo vozilo) {
+		Vozilo updatedVozilo = voziloService.update(vozilo);
+
+		return "redirect:/vozila";
 	}
 
 	@DeleteMapping("/{voziloId}")
-	public void deleteVoziloById(@PathVariable Integer voziloId) {
+	public String deleteVozilotById(@PathVariable Integer voziloId) {
 		voziloService.deleteById(voziloId);
-	}
 
+		return "redirect:/vozila";
+	}
 }
 

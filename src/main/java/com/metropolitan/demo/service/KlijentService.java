@@ -17,5 +17,5 @@ public interface KlijentService {
 
     Klijent update(Klijent klijent);
 
-    void deleteById(Integer klijentId);
+    void deleteById(Integer id);
 }

@@ -1,5 +1,6 @@
 package com.metropolitan.demo.controller;
 
+import com.metropolitan.demo.entity.Klijent;
 import com.metropolitan.demo.entity.Vozilo;
 import com.metropolitan.demo.repository.VoziloRepository;
 import com.metropolitan.demo.service.VoziloService;
@@ -23,6 +24,13 @@ public class VoziloController {
 		List<Vozilo> vozila = voziloService.findAll();
 		model.addAttribute("vozila", vozila);
 		return "vozilo/vozila";
+	}
+
+	@GetMapping("/sva-vozila")
+	public String getSvaVozila(Model model) {
+		List<Vozilo> vozila = voziloService.findAll();
+		model.addAttribute("vozila", vozila);
+		return "rezervacija/dodaj-rezervaciju";
 	}
 
 //	@GetMapping("/{voziloId}")
@@ -64,24 +72,33 @@ public class VoziloController {
 		return "redirect:/vozila";
 	}
 
-	@PostMapping
+	@PostMapping("/vozila/saveVozilo")
 	public String saveVozila(@RequestBody Vozilo vozilo) {
 		Vozilo savedVozilo = voziloService.save(vozilo);
-
 		return "redirect:/vozila";
 	}
 
-	@PutMapping("/saveKlijent")
-	public String updateVozilo(@RequestBody Vozilo vozilo) {
-		Vozilo updatedVozilo = voziloService.update(vozilo);
+	@GetMapping("/vozila/edit-vozilo/{id}")
+	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+		Vozilo vozilo = voziloService.findById(id);
+		model.addAttribute("vozilo", vozilo);
+		return "vozilo/update-vozilo";
+	}
 
+	@PostMapping("/vozila/update-vozilo/{id}")
+	public String updateVozilo(@PathVariable("id") Integer id, @Valid Vozilo vozilo, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			vozilo.setId(id);
+			return "vozilo/update-vozilo";
+		}
+		voziloService.save(vozilo);
+		model.addAttribute("vozila", voziloService.findAll());
 		return "redirect:/vozila";
 	}
 
-	@DeleteMapping("/{voziloId}")
+	@DeleteMapping("/vozila/delete-vozilo/{voziloId}")
 	public String deleteVozilotById(@PathVariable Integer voziloId) {
 		voziloService.deleteById(voziloId);
-
 		return "redirect:/vozila";
 	}
 }

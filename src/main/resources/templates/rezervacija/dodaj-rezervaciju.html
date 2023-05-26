@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Rezervacija</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="../css/shards.min.css"> -->
+</head>
+
+<body>
+<div class="container my-5">
+    <h3> Rezervisi</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-10">
+                <form action="#"  th:action="@{/rezervacije/rezervisi}" th:object="${rezervacija}" method="post">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="klijent" class="col-form-label">Klijent</label> <input type="number" th:field="*{klijent}" class="form-control" id="klijent" placeholder="Klijent"> <span th:if="${#fields.hasErrors('klijent')}" th:errors="*{klijent}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="vozilo" class="col-form-label">Vozilo</label> <input type="number" th:field="*{vozilo}" class="form-control" id="vozilo" placeholder="Vozilo"> <span th:if="${#fields.hasErrors('vozilo')}" th:errors="*{vozilo}" class="text-danger"></span>
+                        </div>
+<!--                        <div class="form-group col-md-6">-->
+<!--                            <label for="vozila" class="col-form-label">Vozilo</label>-->
+<!--                            <select id="vozila" name="vozila" class="form-control">-->
+<!--                                <option th:each="vozilo : ${vozila}" th:value="${vozilo.marka}" th:text="${vozilo.marka}"></option>-->
+<!--                            </select>-->
+<!--                            <span th:if="${#fields.hasErrors('vozilo')}" th:errors="*{vozilo}" class="text-danger"></span>-->
+<!--                        </div>-->
+                        <div class="form-group col-md-8">
+                            <label for="datumRezervacije" class="col-form-label">Datum Rezervacije</label> <input type="date" th:field="*{datumRezervacije}" class="form-control" id="datumRezervacije" placeholder="datumRezervacije"> <span th:if="${#fields.hasErrors('datumRezervacije')}" th:errors="datumRezervacije" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="pocetniDatum" class="col-form-label">Pocetni Datum</label> <input type="date" th:field="*{pocetniDatum}" class="form-control" id="pocetniDatum" placeholder="pocetniDatum"> <span th:if="${#fields.hasErrors('pocetniDatum')}" th:errors="pocetniDatum" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="krajnjiDatum" class="col-form-label">Krajnji Datum</label> <input type="date" th:field="*{krajnjiDatum}" class="form-control" id="krajnjiDatum" placeholder="krajnjiDatum"> <span th:if="${#fields.hasErrors('krajnjiDatum')}" th:errors="*{krajnjiDatum}" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="submit" class="btn btn-primary" value="Rezervisi">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

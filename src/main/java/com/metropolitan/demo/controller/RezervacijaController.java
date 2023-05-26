@@ -45,11 +45,16 @@ package com.metropolitan.demo.controller;
 
 
 
+import com.metropolitan.demo.entity.Klijent;
 import com.metropolitan.demo.entity.Rezervacija;
+import com.metropolitan.demo.entity.Vozilo;
 import com.metropolitan.demo.service.RezervacijaService;
+import com.metropolitan.demo.service.VoziloService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -58,49 +63,79 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RezervacijaController {
 	private final RezervacijaService rezervacijaService;
+	private final VoziloService voziloService;
 
 	@GetMapping("/rezervacije")
 	public String getAllRezervacije(Model model) {
 		List<Rezervacija> rezervacije = rezervacijaService.findAll();
 		model.addAttribute("rezervacije", rezervacije);
-		return "rezervacija";
+		return "rezervacija/rezervacija";
 	}
 
-//	@GetMapping("/{rezervacijaId}")
-//	public String getRezervacijaById(@PathVariable Integer rezervacijaId, Model model) {
-//		Rezervacija rezervacija = rezervacijaService.findById(rezervacijaId);
-//		model.addAttribute("rezervacija", rezervacija);
-//		return "rezervacija/show";
-//	}
+	@GetMapping("/rezervacije/{rezervacijaId}")
+	public String getRezervacijaById(@PathVariable Integer rezervacijaId, Model model) {
+		Rezervacija rezervacijaById = rezervacijaService.findById(rezervacijaId);
+		model.addAttribute("rezervacija", rezervacijaById);
+		return "rezervacija/rezervisi";
+	}
 
-	@GetMapping("/new")
-	public String showCreateForm(Model model) {
+	@GetMapping("rezervacije/nova-rezervacija")
+	public String showCreateRezervacijaForm(Model model) {
+		List<Vozilo> markeVozila = voziloService.findAll();
 		Rezervacija rezervacija = new Rezervacija();
 		model.addAttribute("rezervacija", rezervacija);
-		return "rezervacija/create";
+		model.addAttribute("markeVozila", markeVozila);
+		return "rezervacija/dodaj-rezervaciju";
 	}
 
-	@PostMapping("/new")
-	public String createRezervacija(@ModelAttribute("rezervacija") Rezervacija rezervacija) {
+	@PostMapping("rezervacije/rezervisi")
+	public String addRezervacija(@Valid Rezervacija rezervacija, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "rezervacija/dodaj-rezervaciju";
+		}
+
 		rezervacijaService.save(rezervacija);
 		return "redirect:/rezervacije";
 	}
 
-	@GetMapping("/{rezervacijaId}/edit")
-	public String showEditForm(@PathVariable Integer rezervacijaId, Model model) {
-		Rezervacija rezervacija = rezervacijaService.findById(rezervacijaId);
+
+
+
+//	@GetMapping("/{rezervacijaId}/edit")
+//	public String showEditForm(@PathVariable Integer rezervacijaId, Model model) {
+//		Rezervacija rezervacija = rezervacijaService.findById(rezervacijaId);
+//		model.addAttribute("rezervacija", rezervacija);
+//		return "rezervacija/edit";
+//	}
+
+//	@PostMapping("/{rezervacijaId}/edit")
+//	public String updateRezervacija(@PathVariable Integer rezervacijaId, @ModelAttribute("rezervacija") Rezervacija rezervacija) {
+//		rezervacija.setId(rezervacijaId);
+//		rezervacijaService.update(rezervacija);
+//		return "redirect:/rezervacije";
+//	}
+
+
+	@GetMapping("rezervacije/edit-rezervacija/{id}")
+	public String showUpdateForm(@PathVariable("id") Integer id, Model model) {
+		Rezervacija rezervacija = rezervacijaService.findById(id);
 		model.addAttribute("rezervacija", rezervacija);
-		return "rezervacija/edit";
+		return "rezervacija/update-rezervacija";
 	}
 
-	@PostMapping("/{rezervacijaId}/edit")
-	public String updateRezervacija(@PathVariable Integer rezervacijaId, @ModelAttribute("rezervacija") Rezervacija rezervacija) {
-		rezervacija.setId(rezervacijaId);
-		rezervacijaService.update(rezervacija);
-		return "redirect:/rezervacije";
+	@PostMapping("klijenti/update-rezervacija/{id}")
+	public String updateRezervacija(@PathVariable("id") Integer id, @Valid Rezervacija rezervacija, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			rezervacija.setId(id);
+			return "rezervacija/update-rezervacija";
+		}
+
+		rezervacijaService.save(rezervacija);
+		model.addAttribute("rezervacije", rezervacijaService.findAll());
+		return "redirect:/rezervacija";
 	}
 
-	@PostMapping("/{rezervacijaId}/delete")
+	@PostMapping("/rezervacije/delete-rezervacija/{rezervacijaId}")
 	public String deleteRezervacija(@PathVariable Integer rezervacijaId) {
 		rezervacijaService.deleteById(rezervacijaId);
 		return "redirect:/rezervacije";

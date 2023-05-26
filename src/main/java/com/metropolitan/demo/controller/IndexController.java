@@ -1,4 +1,5 @@
 package com.metropolitan.demo.controller;
+import com.metropolitan.demo.entity.Rezervacija;
 import com.metropolitan.demo.entity.Vozilo;
 import com.metropolitan.demo.repository.VoziloRepository;
 import com.metropolitan.demo.service.VoziloService;
@@ -40,6 +41,20 @@ public class IndexController {
        model.addAttribute("listaVozila", listaVozila);
 
         return "index";
+    }
+
+    @GetMapping("/new-rezervacija")
+    public String showCreateRezervacijaForm(Model model) {
+        List<Vozilo> markeVozila = voziloService.findAll();
+        Rezervacija rezervacija = new Rezervacija();
+        model.addAttribute("rezervacija", rezervacija);
+        model.addAttribute("vozila", markeVozila);
+        return "rezervacija/dodaj-rezervaciju";
+    }
+
+    @GetMapping("/login")
+    public String showLoginForm(Model model){
+        return "/login";
     }
 
 

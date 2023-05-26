@@ -1,11 +1,14 @@
 package com.metropolitan.demo.controller;
 
 
+import com.metropolitan.demo.entity.Rezervacija;
 import com.metropolitan.demo.entity.Transakcija;
 import com.metropolitan.demo.service.TransakcijaService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +36,16 @@ public class TransakcijaController {
 //		model.addAttribute("transakcija", transakcija);
 //		return "transakcija-details";
 //	}
+
+	@PostMapping("/transakcije/plati")
+	public String addTransakcija(@Valid Transakcija transakcija, BindingResult result, Model model) {
+		if (result.hasErrors()) {
+			return "rezervacija/dodaj-rezervaciju";
+		}
+
+		transakcijaService.save(transakcija);
+		return "redirect:/uspesno";
+	}
 
 	@PostMapping("/transakcija")
 	public String saveTransakcija(@ModelAttribute Transakcija transakcija) {

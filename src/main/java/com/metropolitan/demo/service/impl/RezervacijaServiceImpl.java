@@ -29,16 +29,18 @@ public class RezervacijaServiceImpl implements RezervacijaService {
 
     @Override
     public Rezervacija save(Rezervacija rezervacija) {
-        return null;
+
+        return rezervacijaRepository.save(rezervacija);
     }
 
     @Override
     public Rezervacija update(Rezervacija rezervacija) {
-        return null;
+        return rezervacijaRepository.save(rezervacija);
     }
 
     @Override
     public void deleteById(Integer rezervacijaId) {
+        rezervacijaRepository.deleteById(rezervacijaId);
 
     }
 }

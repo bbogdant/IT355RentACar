@@ -14,7 +14,6 @@ public interface VoziloService {
     List<Vozilo> listVozilaByMarka(String marka);
 
 
-
     List<Vozilo> sortByPrica(List<Vozilo> vozila);
 
     Vozilo save(Vozilo vozilo);

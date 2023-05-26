@@ -49,11 +49,12 @@ public class VoziloServiceImpl implements VoziloService {
 
     @Override
     public Vozilo update(Vozilo vozilo) {
-        return null;
+        return voziloRepository.save(vozilo);
     }
 
     @Override
     public void deleteById(Integer voziloId) {
+        voziloRepository.deleteById(voziloId);
 
     }
 }

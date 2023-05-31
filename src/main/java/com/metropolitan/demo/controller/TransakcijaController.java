@@ -1,22 +1,35 @@
 package com.metropolitan.demo.controller;
 
 
+import com.metropolitan.demo.entity.Klijent;
 import com.metropolitan.demo.entity.Rezervacija;
 import com.metropolitan.demo.entity.Transakcija;
+import com.metropolitan.demo.entity.Vozilo;
+import com.metropolitan.demo.service.RezervacijaService;
 import com.metropolitan.demo.service.TransakcijaService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
+
+import com.metropolitan.demo.service.VoziloService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
 public class TransakcijaController {
 	private final TransakcijaService transakcijaService;
+	private final RezervacijaService rezervacijaService;
+
+	private final VoziloService voziloService;
 
 	@GetMapping("/transakcije")
 	public String getAllTransakcije(Model model) {
@@ -37,14 +50,40 @@ public class TransakcijaController {
 //		return "transakcija-details";
 //	}
 
-	@PostMapping("/transakcije/plati")
-	public String addTransakcija(@Valid Transakcija transakcija, BindingResult result, Model model) {
+//	@GetMapping("transakcije/plati-form")
+//	public String showPlatiForm(Model model) {
+//		Transakcija transakcija = new Transakcija();
+//		model.addAttribute("transakcija", transakcija);
+//		return "transakcija/plati-form";
+//	}
+
+	@PostMapping("transakcije/plati")
+	public String addTransakcija(@RequestParam("rezervacijaId") Integer rezervacijaId, @RequestParam("voziloId") Integer voziloId, @Valid Transakcija transakcija, BindingResult result, Model model) {
+
 		if (result.hasErrors()) {
-			return "rezervacija/dodaj-rezervaciju";
+			return "rezervacija/moje-rezervacije";
 		}
 
+
+		Rezervacija rezervacija = rezervacijaService.findById(rezervacijaId);
+		Vozilo vozilo = voziloService.findById(voziloId);
+
+		LocalDate startDate = rezervacija.getPocetniDatum();
+		LocalDate endDate = rezervacija.getKrajnjiDatum();
+
+		Duration duration = Duration.between(startDate.atStartOfDay(), endDate.atStartOfDay());
+		long numberOfDays = duration.toDays();
+		BigDecimal ukupnaCena = vozilo.getCenaPoDanu().multiply(BigDecimal.valueOf(numberOfDays));
+
+
+		transakcija.setRezervacija(rezervacija);
+		transakcija.setDatumTransakcije(LocalDate.from(LocalDateTime.now()));
+		transakcija.setUkupanIznos(ukupnaCena);
+
 		transakcijaService.save(transakcija);
-		return "redirect:/uspesno";
+
+
+		return "redirect:/";
 	}
 
 	@PostMapping("/transakcija")

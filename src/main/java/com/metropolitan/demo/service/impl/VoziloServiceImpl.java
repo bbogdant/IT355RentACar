@@ -44,7 +44,9 @@ public class VoziloServiceImpl implements VoziloService {
 
     @Override
     public Vozilo save(Vozilo vozilo) {
-        return voziloRepository.save(vozilo);
+
+        return
+                voziloRepository.save(vozilo);
     }
 
     @Override

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rezervacije</title>
+    <!-- Uključivanje Bootstrap CSS datoteka -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <!-- Uključivanje dodatnih CSS stilova -->
+    <style>
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="animate__animated animate__fadeIn">Rezervacije</h1>
+
+    <div class="card mt-5 animate__animated animate__fadeIn">
+        <div class="card-header">
+            Lista rezervacija
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Ime klijenta</th>
+                        <th>Adresa</th>
+                        <th>Broj telefona</th>
+                        <th>Email</th>
+                        <th>Marka vozila</th>
+                        <th>Model vozila</th>
+                        <th>Godina proizvodnje</th>
+                        <th>Registarska tablica</th>
+                        <th>Cena po danu</th>
+                        <th>Slika vozila</th>
+                        <th>Datum rezervacije</th>
+                        <th>Početni datum</th>
+                        <th>Krajnji datum</th>
+                        <th>Plati</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="rezervacija : ${mojeRezervacije}">
+                        <td th:text="${rezervacija.klijent.ime}"></td>
+                        <td th:text="${rezervacija.klijent.adresa}"></td>
+                        <td th:text="${rezervacija.klijent.brojTelefona}"></td>
+                        <td th:text="${rezervacija.klijent.email}"></td>
+                        <td th:text="${rezervacija.vozilo.marka}"></td>
+                        <td th:text="${rezervacija.vozilo.model}"></td>
+                        <td th:text="${rezervacija.vozilo.godinaProizvodnje}"></td>
+                        <td th:text="${rezervacija.vozilo.registarskaTablica}"></td>
+                        <td th:text="${rezervacija.vozilo.cenaPoDanu}"></td>
+                        <td>
+                            <img th:src="${rezervacija.vozilo.slika}" alt="Slika vozila" height="100px" width="100px">
+                        </td>
+                        <td th:text="${rezervacija.datumRezervacije}"></td>
+                        <td th:text="${rezervacija.pocetniDatum}"></td>
+                        <td th:text="${rezervacija.krajnjiDatum}"></td>
+<!--                        <input type="hidden" name="rezervacijaId" th:value="${rezervacija.id}"/>-->
+<!--                        <input type="hidden" name="voziloId" th:value="${rezervacija.vozilo.id}"/>-->
+<!--                        <td><button th:action="@{/transakcije/plati}" type="submit" method="post" class="btn btn-primary mt-2"><i>Plati: </i><span th:text="${rezervacija.vozilo.cenaPoDanu}"></span><i class="fas fa-euro-sign ml-2"></i></button></td>-->
+                        <td>
+                            <form th:action="@{/transakcije/plati}" method="post">
+                                <input type="hidden" name="rezervacijaId" th:value="${rezervacija.id}"/>
+                                <input type="hidden" name="voziloId" th:value="${rezervacija.vozilo.id}"/>
+                                <button type="submit" class="btn btn-primary mt-2">
+                                    <i>Plati: </i>
+<!--                                    <span th:text="${rezervacija.vozilo.cenaPoDanu}"></span>-->
+                                    <i class="fas fa-euro-sign ml-2"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--    <a class="btn mt-3" href="/rezervacije/nova-rezervacija">Nova rezervacija</a>-->
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</body>
+</html>

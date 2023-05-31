@@ -1,6 +1,6 @@
 package com.metropolitan.demo.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 
 import java.util.LinkedHashSet;
@@ -10,6 +10,9 @@ import java.util.Set;
 @Entity
 @Table(name = "role")
 public class Role {
+
+    public static final String USER = "User";
+    public static final String ADMIN = "Admin";
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id", nullable = false)

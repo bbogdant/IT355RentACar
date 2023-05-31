@@ -4,6 +4,7 @@ import com.metropolitan.demo.entity.Vozilo;
 import com.metropolitan.demo.repository.VoziloRepository;
 import com.metropolitan.demo.service.VoziloService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,19 +44,27 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/new-rezervacija")
-    public String showCreateRezervacijaForm(Model model) {
-        List<Vozilo> markeVozila = voziloService.findAll();
-        Rezervacija rezervacija = new Rezervacija();
-        model.addAttribute("rezervacija", rezervacija);
-        model.addAttribute("vozila", markeVozila);
-        return "rezervacija/dodaj-rezervaciju";
-    }
+//    @GetMapping("/new-rezervacija")
+//    public String showCreateRezervacijaForm(Model model) {
+//        List<Vozilo> markeVozila = voziloService.findAll();
+//        Rezervacija rezervacija = new Rezervacija();
+//        model.addAttribute("rezervacija", rezervacija);
+//        model.addAttribute("vozila", markeVozila);
+//        return "rezervacija/dodaj-rezervaciju";
+//    }
 
     @GetMapping("/login")
     public String showLoginForm(Model model){
+
         return "/login";
     }
+
+    @GetMapping("/home")
+    public String openAdminPanel(){
+        return "/admin/home";
+    }
+
+
 
 
 }

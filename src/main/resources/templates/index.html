@@ -46,17 +46,20 @@
             <li class="nav-item">
                                 <a class="nav-link" href="/">Početna</a>
                             </li>
-                            <li class="nav-item">
+                            <li  class="nav-item">
                                 <a class="nav-link" href="/vozila">Vozila</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/rezervacije">Rezervacije</a>
+                                <a class="nav-link" th:href="@{/rezervacije/moje-rezervacije}" method="get"> Moje Rezervacije</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Kontakt</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/login">Login</a>
+                                <a class="nav-link" th:href="@{/home}">Admin Panel</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/login" >Login</a>
                             </li>
 
         </ul>
@@ -97,11 +100,20 @@
             <p>Cena po danu: <span th:text="${vozilo.cenaPoDanu} + '&euro;'"></span></p>
             <p>Registrake Tablice: <span th:text="${vozilo.registarskaTablica}"></span></p>
 
-            <a class="btn btn-primary" th:href="@{/new-rezervacija}">Rezervisi</a>
+
+
+            <form th:action="@{/rezervacije/nova-rezervacija}" method="get">
+                <input type="hidden"  name="voziloId" th:value="${vozilo.id}"/>
+                <button class="btn btn-primary" type="submit">Rezervisi</button>
+            </form>
+
+
 
         </div>
     </div>
 </div>
+
+
 
 <div class="main">
 
@@ -117,7 +129,9 @@
 
         <p>Cena po danu: <span th:text="${vozilo.cenaPoDanu} + '&euro;'"></span></p>
         <p>Registrake Tablice: <span th:text="${vozilo.registarskaTablica}"></span></p>
-        <form th:href="@{/rezervisi}"  method="get">
+
+        <form th:href="@{/rezervacije/nova-rezervacija}"  method="get">
+            <input type="hidden"  name="voziloId" th:value="${vozilo.id}"/>
             <button class="btn btn-primary"type="submit">Rezervisi</button>
         </form>
 

@@ -1,7 +1,8 @@
 package com.metropolitan.demo.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -24,12 +25,15 @@ public class Rezervacija {
     @JoinColumn(name = "vozilo_id")
     private Vozilo vozilo;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "datum_rezervacije")
     private LocalDate datumRezervacije;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "pocetni_datum")
     private LocalDate pocetniDatum;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "krajnji_datum")
     private LocalDate krajnjiDatum;
 

@@ -16,4 +16,6 @@ public interface RezervacijaService {
     Rezervacija update(Rezervacija rezervacija);
 
     void deleteById(Integer rezervacijaId);
+
+    List<Rezervacija> findAllByLoggedInMember();
 }

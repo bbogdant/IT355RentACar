@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rent a Car</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px 0;
+            text-align: center;
+            margin: 20px;
+        }
+
+        .card{
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+            rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+            rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+            width: 300px;
+            text-align: center;
+            display: inline-block;
+        }
+        .main{
+            text-align: center;
+            margin: 50px;
+        }
+
+        .btn-primary{
+            margin-bottom: 50px;
+        }
+
+    </style>
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Navbar</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" href="/klijenti">Klijenti</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/vozila">Vozila</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/rezervacije">Rezervacije</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/transakcije">Transakcije</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout" >Login</a>
+            </li>
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0" action="/pretraga/{marka}" method="get">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="marka" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+

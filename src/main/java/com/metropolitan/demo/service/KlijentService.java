@@ -11,7 +11,13 @@ public interface KlijentService {
 
     List<Klijent> findAll();
 
+    Klijent findByIme(String ime);
+
     Klijent findById(Integer klijentId);
+
+    Klijent getLoggedInUser();
+
+    boolean isUserAdmin();
 
     Klijent save(Klijent klijent);
 

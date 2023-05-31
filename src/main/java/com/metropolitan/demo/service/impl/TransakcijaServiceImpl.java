@@ -29,12 +29,12 @@ public class TransakcijaServiceImpl implements TransakcijaService {
 
     @Override
     public Transakcija save(Transakcija transakcija) {
-        return null;
+        return transakcijaRepository.save(transakcija);
     }
 
     @Override
     public Transakcija update(Transakcija transakcija) {
-        return null;
+        return transakcijaRepository.save(transakcija);
     }
 
     @Override

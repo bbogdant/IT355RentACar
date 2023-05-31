@@ -11,4 +11,6 @@ public interface VoziloRepository extends JpaRepository<Vozilo, Integer> {
     List<Vozilo> findByMarka(String marka);
 
 
+
+
 }

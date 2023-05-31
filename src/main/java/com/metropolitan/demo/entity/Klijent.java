@@ -1,13 +1,15 @@
 package com.metropolitan.demo.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "klijent")
 public class Klijent {

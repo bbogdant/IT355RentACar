@@ -5,7 +5,7 @@ package com.metropolitan.demo.controller;
 import com.metropolitan.demo.entity.Klijent;
 import com.metropolitan.demo.repository.KlijentRepository;
 import com.metropolitan.demo.service.KlijentService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +31,7 @@ public class KlijentController {
 //	public String getKlijentById(@PathVariable Integer klijentId, Model model) {
 //		Klijent klijent = klijentService.findById(klijentId);
 //		model.addAttribute("klijent", klijent);
-//		return "klijent/klijenti";
+//		return "rezervacija/rezervacija";
 //	}
 
 	@GetMapping("klijenti/signup")
@@ -48,7 +48,7 @@ public class KlijentController {
 		}
 
 		klijentService.save(klijent);
-		return "redirect:/klijenti";
+		return "redirect:/";
 	}
 
 	@PostMapping("klijenti/saveKlijent")

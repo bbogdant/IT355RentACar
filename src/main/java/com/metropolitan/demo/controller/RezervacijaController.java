@@ -47,16 +47,23 @@ package com.metropolitan.demo.controller;
 
 import com.metropolitan.demo.entity.Klijent;
 import com.metropolitan.demo.entity.Rezervacija;
+import com.metropolitan.demo.entity.Transakcija;
 import com.metropolitan.demo.entity.Vozilo;
+import com.metropolitan.demo.service.KlijentService;
 import com.metropolitan.demo.service.RezervacijaService;
 import com.metropolitan.demo.service.VoziloService;
-import jakarta.validation.Valid;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -65,6 +72,11 @@ public class RezervacijaController {
 	private final RezervacijaService rezervacijaService;
 	private final VoziloService voziloService;
 
+	private final KlijentService klijentService;
+
+	@Autowired
+	private HttpServletRequest request;
+
 	@GetMapping("/rezervacije")
 	public String getAllRezervacije(Model model) {
 		List<Rezervacija> rezervacije = rezervacijaService.findAll();
@@ -72,30 +84,38 @@ public class RezervacijaController {
 		return "rezervacija/rezervacija";
 	}
 
-	@GetMapping("/rezervacije/{rezervacijaId}")
-	public String getRezervacijaById(@PathVariable Integer rezervacijaId, Model model) {
-		Rezervacija rezervacijaById = rezervacijaService.findById(rezervacijaId);
-		model.addAttribute("rezervacija", rezervacijaById);
-		return "rezervacija/rezervisi";
+	@GetMapping("/rezervacije/moje-rezervacije")
+	public String getMyPurchasesPage(Model model) {
+		model.addAttribute("transakcija", new Transakcija());
+		model.addAttribute("mojeRezervacije", rezervacijaService.findAllByLoggedInMember());
+		return "rezervacija/moje-rezervacije";
 	}
 
-	@GetMapping("rezervacije/nova-rezervacija")
-	public String showCreateRezervacijaForm(Model model) {
-		List<Vozilo> markeVozila = voziloService.findAll();
+
+
+	@GetMapping("/rezervacije/nova-rezervacija")
+	public String showCreateRezervacijaForm(@RequestParam("voziloId") Integer voziloId, Model model) {
+		Vozilo vozilo = voziloId != null ? voziloService.findById(voziloId) : new Vozilo();
 		Rezervacija rezervacija = new Rezervacija();
 		model.addAttribute("rezervacija", rezervacija);
-		model.addAttribute("markeVozila", markeVozila);
+		model.addAttribute("vozilo", vozilo);
+
 		return "rezervacija/dodaj-rezervaciju";
 	}
 
-	@PostMapping("rezervacije/rezervisi")
-	public String addRezervacija(@Valid Rezervacija rezervacija, BindingResult result, Model model) {
+	@PostMapping("/rezervacije/rezervisi")
+	public String addRezervacija(@Valid Rezervacija rezervacija, @RequestParam("voziloId") Integer voziloId, BindingResult result) {
+
 		if (result.hasErrors()) {
 			return "rezervacija/dodaj-rezervaciju";
 		}
 
+
+		rezervacija.setKlijent(klijentService.getLoggedInUser());
+		rezervacija.setVozilo(voziloService.findById(voziloId));
+		rezervacija.setDatumRezervacije(LocalDate.from(LocalDateTime.now()));
 		rezervacijaService.save(rezervacija);
-		return "redirect:/rezervacije";
+		return "redirect:/";
 	}
 
 

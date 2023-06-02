@@ -80,4 +80,9 @@ public class KlijentServiceImpl  implements KlijentService {
     public boolean isUserAdmin() {
         return getLoggedInUser() != null && getLoggedInUser().getRole().getImeRole().equals(Role.ADMIN);
     }
+
+    @Override
+    public boolean isUserUser() {
+        return getLoggedInUser() != null && getLoggedInUser().getRole().getImeRole().equals(Role.USER);
+    }
 }

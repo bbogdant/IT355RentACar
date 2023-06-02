@@ -26,15 +26,16 @@ public class WebSecurityConf {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers( "/", "/klijenti/signup").permitAll()
-                .antMatchers(HttpMethod.GET,"/rezervacije").hasRole("Admin")
-                .antMatchers("/klijenti").hasRole("Admin")
-                .antMatchers("/vozila/**").hasRole("Admin")
-                .antMatchers("/transakcije").hasRole("Admin")
-                .antMatchers(HttpMethod.GET,"/home").hasRole("Admin")
+                .antMatchers( "/", "/klijenti/signup","/sortiraj", "/pretraga/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/rezervacije").hasAuthority("Admin")
+                .antMatchers("/klijenti").hasAuthority("Admin")
+                .antMatchers("/vozila/**").hasAuthority("Admin")
+                .antMatchers("/transakcije").hasAuthority("Admin")
+                .antMatchers("/home").hasAuthority("Admin")
 
 
-                .antMatchers("/nova-rezervacija").hasRole("User")
+                .antMatchers("/nova-rezervacija/**").hasAuthority("User")
+
 
                 .anyRequest().authenticated()
                 .and()
@@ -49,7 +50,7 @@ public class WebSecurityConf {
                 )
                 .logout(logout ->
                         logout
-                                .logoutSuccessUrl("/login?logout")
+                                .logoutSuccessUrl("/")
                 );
 
         return http.build();

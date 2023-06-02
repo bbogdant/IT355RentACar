@@ -15,8 +15,12 @@ public class GlobalControllerAdvice {
     // ATTRIBUTE
     @ModelAttribute("isAdmin")
     public boolean isAdmin() {
-
         return klijentService.isUserAdmin();
+    }
+
+    @ModelAttribute("isUser")
+    public boolean isUser() {
+        return klijentService.isUserUser();
     }
 
     @ModelAttribute("user")

@@ -1,6 +1,5 @@
 package com.metropolitan.demo.controller;
 
-import com.metropolitan.demo.entity.Klijent;
 import com.metropolitan.demo.entity.Vozilo;
 import com.metropolitan.demo.repository.VoziloRepository;
 import com.metropolitan.demo.service.VoziloService;
@@ -50,7 +49,7 @@ public class VoziloController {
 
 	@GetMapping("/vozila/search")
 	public String pronadjiVozilaPoModelu(@RequestParam("marka") String marka, Model model) {
-		List<Vozilo> vozila = (List<Vozilo>) voziloRepository.findByMarka(marka);
+		List<Vozilo> vozila = (List<Vozilo>) voziloRepository.findByMarkaIgnoreCase(marka);
 		model.addAttribute("vozila", vozila);
 		return "vozilo/vozila";
 	}

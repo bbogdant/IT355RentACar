@@ -19,9 +19,19 @@
         rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 
         width: 300px;
+        margin: 10px;
         text-align: center;
         display: inline-block;
     }
+    .card {
+        transition: transform 0.3s;
+    }
+
+    .card:hover {
+        transform: scale(1.05);
+    }
+
+
     .main{
         text-align: center;
         margin: 50px;
@@ -39,50 +49,42 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Rent A Car</a>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item">
-                                <a class="nav-link" href="/">Početna</a>
+                                <a class="nav-link" th:if="${isUser || user == null}"  href="/">Početna</a>
                             </li>
-                            <li  class="nav-item">
-                                <a class="nav-link" href="/vozila">Vozila</a>
+
+                            <li class="nav-item">
+                                <a class="nav-link" th:if="${isUser}" th:href="@{/rezervacije/moje-rezervacije}" method="get"> Moje Rezervacije</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" th:href="@{/rezervacije/moje-rezervacije}" method="get"> Moje Rezervacije</a>
+                                <a class="nav-link" th:if="${isAdmin}" th:href="@{/}">Početna</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Kontakt</a>
                             </li>
+
                             <li class="nav-item">
-                                <a class="nav-link" th:href="@{/home}">Admin Panel</a>
+                                <a class="nav-link" th:if="${user == null}"  th:href="@{/login}" >Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="/login" >Login</a>
+                                <a  class="nav-link" th:if="${user != null}" th:href="@{/logout}">Logout</a>
                             </li>
 
+
+
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="/pretraga/{marka}" method="get">
+        <form class="form-inline my-2 my-lg-0" th:action="@{/pretraga/{marka}}"  method="get">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" name="marka" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
 </nav>
 
-
-
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-
-
-
-
-<div class="main">
+<div class="main" th:if="${user == null}" >
     <h1>RENT A CAR</h1>
 
     <form th:action="@{/sortiraj}"  method="get">
@@ -115,7 +117,102 @@
 
 
 
-<div class="main">
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+<div class="main" th:if="${isUser}">
+    <h1>RENT A CAR</h1>
+
+    <form th:action="@{/sortiraj}"  method="get">
+        <button class="btn btn-primary"type="submit">Sortiraj po ceni</button>
+    </form>
+
+    <div class="lista-vozila">
+
+        <div class="card" th:each="vozilo : ${vozila}">
+            <img th:src="${vozilo.slika}" alt="Slika vozila" width="250" height="180">
+            <h2 th:text="${vozilo.marka}">Marka</h2>
+            <h2 th:text="${vozilo.model}">Model</h2>
+            <p th:text="${vozilo.godinaProizvodnje}">Godište</p>
+
+            <p>Cena po danu: <span th:text="${vozilo.cenaPoDanu} + '&euro;'"></span></p>
+            <p>Registrake Tablice: <span th:text="${vozilo.registarskaTablica}"></span></p>
+
+
+
+            <form th:action="@{/rezervacije/nova-rezervacija}" method="get">
+                <input type="hidden"  name="voziloId" th:value="${vozilo.id}"/>
+                <button class="btn btn-primary" type="submit">Rezervisi</button>
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+
+<div th:if="${isAdmin}" >
+
+    <div class="container mt-4">
+        <h1>Dobrodošli u Admin Panel</h1>
+        <p class="lead">Upravljajte vašim veb sajtom lako pomoću naših moćnih alata.</p>
+
+        <div class="row mt-5">
+            <div class="col-lg-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Vozila</h5>
+                        <p class="card-text">Upravljajte informacijama o vozilima.</p>
+                        <a th:href="@{/vozila}" href="#" class="btn btn-primary">Idi na Vozila</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Rezervacije</h5>
+                        <p class="card-text">Pregledajte i upravljajte rezervacijama.</p>
+                        <a th:href="@{/rezervacije}" href="#" class="btn btn-primary">Idi na Rezervacije</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Transakcije</h5>
+                        <p class="card-text">Prikaz i upravljanje klijentskim transakcijama.</p>
+                        <a th:href="@{/transakcije}" href="#" class="btn btn-primary">Idi na Transakcije</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Klijenti</h5>
+                        <p class="card-text">Upravljanje informacijama o klijentima.</p>
+                        <a th:href="@{/klijenti}" href="#" class="btn btn-primary">Idi na Klijente</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</div>
+
+
+
+<div class="main" th:if="${isUser}">
 
 
 
@@ -130,9 +227,9 @@
         <p>Cena po danu: <span th:text="${vozilo.cenaPoDanu} + '&euro;'"></span></p>
         <p>Registrake Tablice: <span th:text="${vozilo.registarskaTablica}"></span></p>
 
-        <form th:href="@{/rezervacije/nova-rezervacija}"  method="get">
+        <form th:action="@{/rezervacije/nova-rezervacija}" method="get">
             <input type="hidden"  name="voziloId" th:value="${vozilo.id}"/>
-            <button class="btn btn-primary"type="submit">Rezervisi</button>
+            <button class="btn btn-primary" type="submit">Rezervisi</button>
         </form>
 
     </div>
@@ -174,18 +271,18 @@
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6">
-                <h4>Pretplatite se na naš bilten</h4>
+                <h4>Pretplatite se na naš newsletter</h4>
                 <p>Prijavite se kako biste primali najnovije vijesti i ažuriranja.</p>
                 <form class="subscribe-form">
                     <input type="email" class="form-control" placeholder="Unesite vašu e-mail adresu">
-                    <button type="submit" class="btn btn-primary">Pretplati se</button>
+                    <button style="margin-top: 10px" type="submit" class="btn btn-primary">Pretplati se</button>
                 </form>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="footer-bottom">
-                    <p>Sva prava zadržana &copy; 2023</p>
+                    <p>Bogdan Trajkovic 4405 &copy; 2023</p>
                 </div>
             </div>
         </div>

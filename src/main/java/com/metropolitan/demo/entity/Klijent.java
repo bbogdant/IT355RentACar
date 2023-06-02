@@ -52,7 +52,6 @@ public class Klijent {
                 ", brojTelefona='" + brojTelefona + '\'' +
                 ", email='" + email + '\'' +
                 ", role=" + role +
-                ", rezervacijas=" + rezervacijas +
                 '}';
     }
 }

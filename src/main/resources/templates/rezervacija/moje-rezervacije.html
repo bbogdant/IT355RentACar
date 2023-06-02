@@ -57,17 +57,13 @@
                         <td th:text="${rezervacija.datumRezervacije}"></td>
                         <td th:text="${rezervacija.pocetniDatum}"></td>
                         <td th:text="${rezervacija.krajnjiDatum}"></td>
-<!--                        <input type="hidden" name="rezervacijaId" th:value="${rezervacija.id}"/>-->
-<!--                        <input type="hidden" name="voziloId" th:value="${rezervacija.vozilo.id}"/>-->
-<!--                        <td><button th:action="@{/transakcije/plati}" type="submit" method="post" class="btn btn-primary mt-2"><i>Plati: </i><span th:text="${rezervacija.vozilo.cenaPoDanu}"></span><i class="fas fa-euro-sign ml-2"></i></button></td>-->
+
                         <td>
                             <form th:action="@{/transakcije/plati}" method="post">
                                 <input type="hidden" name="rezervacijaId" th:value="${rezervacija.id}"/>
                                 <input type="hidden" name="voziloId" th:value="${rezervacija.vozilo.id}"/>
-                                <button type="submit" class="btn btn-primary mt-2">
+                                <button type="submit" class="btn btn-primary mt-2" th:if="${!rezervacija.placeno}">
                                     <i>Plati: </i>
-<!--                                    <span th:text="${rezervacija.vozilo.cenaPoDanu}"></span>-->
-                                    <i class="fas fa-euro-sign ml-2"></i>
                                 </button>
                             </form>
                         </td>
@@ -84,6 +80,8 @@
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 
 
 </body>

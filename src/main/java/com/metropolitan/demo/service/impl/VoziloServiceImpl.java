@@ -32,7 +32,7 @@ public class VoziloServiceImpl implements VoziloService {
 
     @Override
     public List<Vozilo> listVozilaByMarka(String marka) {
-        return voziloRepository.findByMarka(marka);
+        return voziloRepository.findByMarkaIgnoreCase(marka);
     }
 
 

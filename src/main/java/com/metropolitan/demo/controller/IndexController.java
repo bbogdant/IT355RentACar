@@ -1,10 +1,8 @@
 package com.metropolitan.demo.controller;
-import com.metropolitan.demo.entity.Rezervacija;
 import com.metropolitan.demo.entity.Vozilo;
 import com.metropolitan.demo.repository.VoziloRepository;
 import com.metropolitan.demo.service.VoziloService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,7 +36,7 @@ public class IndexController {
     @GetMapping("/pretraga/{marka}")
     public String pronadjiVozilaPoMarci(@RequestParam("marka") String marka, Model model) {
 
-       List<Vozilo> listaVozila = (List<Vozilo>) voziloRepository.findByMarka(marka);
+       List<Vozilo> listaVozila = (List<Vozilo>) voziloRepository.findByMarkaIgnoreCase(marka);
        model.addAttribute("listaVozila", listaVozila);
 
         return "index";

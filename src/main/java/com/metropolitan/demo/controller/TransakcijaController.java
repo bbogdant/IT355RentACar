@@ -80,8 +80,10 @@ public class TransakcijaController {
 		transakcija.setDatumTransakcije(LocalDate.from(LocalDateTime.now()));
 		transakcija.setUkupanIznos(ukupnaCena);
 
-		transakcijaService.save(transakcija);
+		rezervacija.setPlaceno(true);
 
+
+		transakcijaService.save(transakcija);
 
 		return "redirect:/";
 	}

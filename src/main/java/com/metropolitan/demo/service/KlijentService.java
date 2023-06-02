@@ -18,6 +18,7 @@ public interface KlijentService {
     Klijent getLoggedInUser();
 
     boolean isUserAdmin();
+    boolean isUserUser();
 
     Klijent save(Klijent klijent);
 

@@ -37,19 +37,11 @@ public class Rezervacija {
     @Column(name = "krajnji_datum")
     private LocalDate krajnjiDatum;
 
+    @Column(name = "placeno")
+    private Boolean placeno;
+
     @OneToMany(mappedBy = "rezervacija")
     private Set<Transakcija> transakcijas = new LinkedHashSet<>();
 
-    @Override
-    public String toString() {
-        return "Rezervacija{" +
-                "id=" + id +
-                ", klijent=" + klijent +
-                ", vozilo=" + vozilo +
-                ", datumRezervacije=" + datumRezervacije +
-                ", pocetniDatum=" + pocetniDatum +
-                ", krajnjiDatum=" + krajnjiDatum +
-                ", transakcijas=" + transakcijas +
-                '}';
-    }
+
 }

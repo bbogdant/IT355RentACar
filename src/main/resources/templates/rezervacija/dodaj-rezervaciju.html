@@ -52,12 +52,23 @@
                         <div class="col-md-6">
                             <input type="submit" class="btn btn-primary" value="Rezervisi">
                         </div>
+
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    var pocetniDatumInput = document.getElementById('pocetniDatum');
+    var krajnjiDatumInput = document.getElementById('krajnjiDatum');
+
+    pocetniDatumInput.addEventListener('change', function() {
+        krajnjiDatumInput.min = pocetniDatumInput.value;
+        krajnjiDatumInput.disabled = false;
+    });
+</script>
 </body>
 
 </html>

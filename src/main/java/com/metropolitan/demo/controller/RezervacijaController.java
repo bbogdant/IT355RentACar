@@ -114,6 +114,7 @@ public class RezervacijaController {
 		rezervacija.setKlijent(klijentService.getLoggedInUser());
 		rezervacija.setVozilo(voziloService.findById(voziloId));
 		rezervacija.setDatumRezervacije(LocalDate.from(LocalDateTime.now()));
+		rezervacija.setPlaceno(false);
 		rezervacijaService.save(rezervacija);
 		return "redirect:/";
 	}

@@ -42,6 +42,13 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/pretraga/{boja}")
+    public String pronadjiVozilaPoBoji(@RequestParam("boja") String boja, Model model) {
+        List<Vozilo> vozila = (List<Vozilo>) voziloRepository.findByBoja(boja);
+        model.addAttribute("vozila", vozila);
+        return "index";
+    }
+
 //    @GetMapping("/new-rezervacija")
 //    public String showCreateRezervacijaForm(Model model) {
 //        List<Vozilo> markeVozila = voziloService.findAll();
@@ -60,6 +67,14 @@ public class IndexController {
     @GetMapping("/home")
     public String openAdminPanel(){
         return "/admin/home";
+    }
+
+
+    @GetMapping("/detalji")
+    public String prikaziDetaljeVozila(@RequestParam("voziloId") Integer voziloId, Model model) {
+        Vozilo vozilo = voziloService.findById(voziloId);
+        model.addAttribute("vozilo", vozilo);
+        return "vozilo/detalji";
     }
 
 

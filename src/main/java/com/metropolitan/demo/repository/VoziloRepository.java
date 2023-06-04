@@ -10,6 +10,8 @@ public interface VoziloRepository extends JpaRepository<Vozilo, Integer> {
 
     List<Vozilo> findByMarkaIgnoreCase(String marka);
 
+    List<Vozilo> findByBoja(String boja);
+
 
 
 

@@ -35,6 +35,11 @@ public class VoziloServiceImpl implements VoziloService {
         return voziloRepository.findByMarkaIgnoreCase(marka);
     }
 
+    @Override
+    public List<Vozilo> listVozilaByBoja(String boja) {
+        return voziloRepository.findByBoja(boja);
+    }
+
 
     @Override
     public List<Vozilo> sortByPrica(List<Vozilo> vozila) {

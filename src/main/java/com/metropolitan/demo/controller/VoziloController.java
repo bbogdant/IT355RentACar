@@ -54,6 +54,8 @@ public class VoziloController {
 		return "vozilo/vozila";
 	}
 
+
+
 	@GetMapping("vozila/new-form")
 	public String showForm(Model model) {
 		Vozilo vozilo = new Vozilo();

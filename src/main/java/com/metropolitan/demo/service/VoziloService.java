@@ -13,6 +13,8 @@ public interface VoziloService {
 
     List<Vozilo> listVozilaByMarka(String marka);
 
+    List<Vozilo> listVozilaByBoja(String boja);
+
 
     List<Vozilo> sortByPrica(List<Vozilo> vozila);
 

@@ -78,6 +78,8 @@
                 <th>Godina Proizvodnje</th>
                 <th>Cena Po Danu</th>
                 <th>Registraske Tablice</th>
+                <th>Boja</th>
+                <th>Tip Motora</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
@@ -92,6 +94,8 @@
             <td th:text="${vozilo.godinaProizvodnje}"></td>
             <td th:text="${vozilo.cenaPoDanu} + '&euro;'"></td>
             <td th:text="${vozilo.registarskaTablica}"></td>
+            <td th:text="${vozilo.boja}"></td>
+            <td th:text="${vozilo.tip}"></td>
 
             <td><a th:href="@{/vozila/edit-vozilo/{id}(id=${vozilo.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
             <td><a th:href="@{/vozila/delete-vozilo/{id}(id=${vozilo.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>

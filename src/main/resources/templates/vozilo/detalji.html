@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalji vozila</title>
+    <!-- Dodajte stilove i ostale potrebne resurse -->
+
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 8px;
+        }
+
+        .card img {
+            width: 600px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .card h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .card span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <h1>Detalji vozila</h1>
+
+    <div class="card">
+        <img th:src="${vozilo.slika}" alt="Slika vozila">
+        <h2 th:text="${vozilo.marka} + ' ' + ${vozilo.model}">Marka i model</h2>
+        <p th:text="'Boja: ' + ${vozilo.boja}">Bojae</p>
+        <p th:text="'Tip: ' + ${vozilo.tip}">Tip Motora</p>
+        <p th:text="'Godište: ' + ${vozilo.godinaProizvodnje}">Godište</p>
+        <p th:text="'Cena po danu: ' + ${vozilo.cenaPoDanu} + ' €'">Cena po danu</p>
+        <p th:text="'Registrake tablice: ' + ${vozilo.registarskaTablica}">Registrake Tablice</p>
+
+        <!-- Dodajte ostale detalje koje želite prikazati -->
+    </div>
+</div>
+
+<!-- Dodajte skripte i ostale potrebne resurse -->
+</body>
+
+</html>

@@ -92,6 +92,12 @@
                         <div class="form-group col-md-8">
                             <label for="slika" class="col-form-label">Slika</label> <input type="text" th:field="*{slika}" class="form-control" id="slika" placeholder="slika"> <span th:if="${#fields.hasErrors('slika')}" th:errors="*{slika}" class="text-danger"></span>
                         </div>
+                        <div class="form-group col-md-6">
+                            <label for="model" class="col-form-label">Boja</label> <input type="text" th:field="*{model}" class="form-control" id="boja" placeholder="Model"> <span th:if="${#fields.hasErrors('boja')}" th:errors="*{model}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="model" class="col-form-label">Tip Motora</label> <input type="text" th:field="*{model}" class="form-control" id="tip" placeholder="Model"> <span th:if="${#fields.hasErrors('tip')}" th:errors="*{model}" class="text-danger"></span>
+                        </div>
                         <div class="col-md-6">
                             <input type="submit" class="btn btn-primary" value="Update Vozilo">
                         </div>

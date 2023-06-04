@@ -35,6 +35,12 @@ public class Vozilo {
     @Column(name = "slika", length = 1000)
     private String slika;
 
+    @Column(name = "boja")
+    private String boja;
+
+    @Column(name = "tip")
+    private String tip;
+
     @OneToMany(mappedBy = "vozilo")
     private Set<Rezervacija> rezervacijas = new LinkedHashSet<>();
 

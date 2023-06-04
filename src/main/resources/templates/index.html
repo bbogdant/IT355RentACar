@@ -38,8 +38,17 @@
     }
 
     .btn-primary{
-        margin-bottom: 50px;
+        margin-bottom: 30px;
     }
+
+    .button-container{
+        display: flex;
+        justify-content: center;
+
+    }
+
+
+
 
 </style>
 
@@ -81,6 +90,24 @@
             <input class="form-control mr-sm-2" type="search" placeholder="Search" name="marka" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+
+<!--        <form class="form-inline my-2 my-lg-0" th:action="@{/pretraga/{boja}}"  method="get">-->
+<!--            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="boja" aria-label="Search">-->
+<!--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search Boja</button>-->
+<!--        </form>-->
+
+        <form class="form-inline my-2 my-lg-0" th:action="@{/pretraga/{boja}}" method="get">
+            <select class="form-control mr-sm-2" name="boja">
+                <option >Sve boje</option>
+                <option>crvena</option>
+                <option>plava</option>
+                <option>crna</option>
+                <option>bela</option>
+                <option>siva</option>
+                <!-- Dodajte ostale boje kao opcije -->
+            </select>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pretraži boju</button>
+        </form>
     </div>
 </nav>
 
@@ -103,13 +130,17 @@
             <p>Registrake Tablice: <span th:text="${vozilo.registarskaTablica}"></span></p>
 
 
+            <div class="button-container">
+                <form th:action="@{/rezervacije/nova-rezervacija}" method="get">
+                    <input type="hidden" name="voziloId" th:value="${vozilo.id}" />
+                    <button class="btn btn-primary" type="submit">Rezerviši</button>
+                </form>
 
-            <form th:action="@{/rezervacije/nova-rezervacija}" method="get">
-                <input type="hidden"  name="voziloId" th:value="${vozilo.id}"/>
-                <button class="btn btn-primary" type="submit">Rezervisi</button>
-            </form>
-
-
+                <form th:action="@{/detalji}" method="get">
+                    <input type="hidden" name="voziloId" th:value="${vozilo.id}" />
+                    <button class="btn btn-secondary" type="submit">Detaljnije</button>
+                </form>
+            </div>
 
         </div>
     </div>
@@ -150,6 +181,11 @@
             <form th:action="@{/rezervacije/nova-rezervacija}" method="get">
                 <input type="hidden"  name="voziloId" th:value="${vozilo.id}"/>
                 <button class="btn btn-primary" type="submit">Rezervisi</button>
+            </form>
+
+            <form th:action="@{/detalji}" method="get">
+                <input type="hidden" name="voziloId" th:value="${vozilo.id}"/>
+                <button class="btn btn-secondary" type="submit">Detaljnije</button>
             </form>
 
 
@@ -213,7 +249,6 @@
 
 
 <div class="main" th:if="${isUser}">
-
 
 
 <div class="lista-vozila">

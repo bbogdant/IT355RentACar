@@ -73,7 +73,7 @@
                                 <a class="nav-link" th:if="${isAdmin}" th:href="@{/}">Početna</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Kontakt</a>
+                                <a class="nav-link" th:href="@{/kontakt}" method="get">Kontakt</a>
                             </li>
 
                             <li class="nav-item">
@@ -86,28 +86,20 @@
 
 
         </ul>
-        <form class="form-inline my-2 my-lg-0" th:action="@{/pretraga/{marka}}"  method="get">
+        <form class="form-inline my-2 my-lg-0" th:action="@{/pretraga/{marka}}"  method="get" th:if="${!isAdmin}">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" name="marka" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
 
-<!--        <form class="form-inline my-2 my-lg-0" th:action="@{/pretraga/{boja}}"  method="get">-->
-<!--            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="boja" aria-label="Search">-->
-<!--            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search Boja</button>-->
-<!--        </form>-->
 
-        <form class="form-inline my-2 my-lg-0" th:action="@{/pretraga/{boja}}" method="get">
+        <form class="form-inline my-2 my-lg-0" th:action="@{/pretraga/{boja}}" method="get" th:if="${!isAdmin}">
             <select class="form-control mr-sm-2" name="boja">
-                <option >Sve boje</option>
-                <option>crvena</option>
-                <option>plava</option>
-                <option>crna</option>
-                <option>bela</option>
-                <option>siva</option>
-                <!-- Dodajte ostale boje kao opcije -->
+                <option value="">Sve boje</option>
+                <option th:each="vozilo : ${vozila}" th:value="${vozilo.boja}" th:text="${vozilo.boja}"></option>
             </select>
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Pretraži boju</button>
         </form>
+
     </div>
 </nav>
 
@@ -281,37 +273,54 @@
             <div class="col-lg-3 col-md-6">
                 <h4>O nama</h4>
                 <ul class="footer-links list-unstyled">
-                    <li><a href="#">O nama</a></li>
-                    <li><a href="#">Uslovi korištenja</a></li>
-                    <li><a href="#">Privatnost</a></li>
-                    <li><a href="#">Kontakt</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:if="${isUser}" th:href="@{/rezervacije/moje-rezervacije}" method="get"> Moje Rezervacije</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  th:href="@{/}">Početna</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/kontakt}" method="get">Kontakt</a>
+                    </li>
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4>Kategorije</h4>
                 <ul class="footer-links list-unstyled">
-                    <li><a href="#">Kategorija 1</a></li>
-                    <li><a href="#">Kategorija 2</a></li>
-                    <li><a href="#">Kategorija 3</a></li>
-                    <li><a href="#">Kategorija 4</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:if="${isUser}" th:href="@{/rezervacije/moje-rezervacije}" method="get"> Moje Rezervacije</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  th:href="@{/}">Početna</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/kontakt}" method="get">Kontakt</a>
+                    </li>
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6">
                 <h4>Korisni linkovi</h4>
                 <ul class="footer-links list-unstyled">
-                    <li><a href="#">Link 1</a></li>
-                    <li><a href="#">Link 2</a></li>
-                    <li><a href="#">Link 3</a></li>
-                    <li><a href="#">Link 4</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:if="${isUser}" th:href="@{/rezervacije/moje-rezervacije}" method="get"> Moje Rezervacije</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  th:href="@{/}">Početna</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/kontakt}" method="get">Kontakt</a>
+                    </li>
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6">
-                <h4>Pretplatite se na naš newsletter</h4>
-                <p>Prijavite se kako biste primali najnovije vijesti i ažuriranja.</p>
-                <form class="subscribe-form">
-                    <input type="email" class="form-control" placeholder="Unesite vašu e-mail adresu">
-                    <button style="margin-top: 10px" type="submit" class="btn btn-primary">Pretplati se</button>
-                </form>
+                <h4>Kontakt</h4>
+                <p>
+                    Adresa: Nis 123 Srbija
+                    Radno vreme: 9-5
+                    Broj telefona: 123-2345
+                </p>
+
+
             </div>
         </div>
         <div class="row">

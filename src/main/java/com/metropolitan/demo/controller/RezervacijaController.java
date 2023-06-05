@@ -159,7 +159,7 @@ public class RezervacijaController {
 	@PostMapping("/rezervacije/delete-rezervacija/{rezervacijaId}")
 	public String deleteRezervacija(@PathVariable Integer rezervacijaId) {
 		rezervacijaService.deleteById(rezervacijaId);
-		return "redirect:/rezervacije";
+		return "redirect:/";
 	}
 }
 

@@ -31,34 +31,55 @@
 <div class="container">
     <h1 class="mt-4 mb-4">Prikaz transakcija</h1>
 
-    <table class="table table-striped">
+    <table class="table table-striped" id="transakcijaTable">
         <thead>
         <tr>
             <th>ID</th>
             <th>Rezervacije</th>
             <th>Datum Transakcije</th>
             <th>Ukupan Iznos</th>
-            <!-- Dodajte dodatne kolone prema potrebi -->
+
         </tr>
         </thead>
         <tbody>
-        <!-- Iterirajte kroz listu transakcija i prikažite ih -->
+
         <tr th:each="transakcija : ${transakcije}">
             <td th:text="${transakcija.id}"></td>
             <td th:text="${transakcija.rezervacija.id}"></td>
             <td th:text="${transakcija.datumTransakcije}"></td>
             <td th:text="${transakcija.ukupanIznos}"></td>
         </tr>
+
         </tbody>
     </table>
+    <p id="ukupan-iznos"></p>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- Dodajte dodatne JavaScript datoteke za funkcionalnosti stranice -->
+
 <script>
-    // Dodajte prilagođeni JavaScript kod
+    // Pristupamo tabeli
+    var tabela = document.getElementsByTagName("tbody")[0];
+
+    // Inicijalizujemo ukupan iznos na 0
+    var ukupanIznos = 0;
+
+    // Prolazimo kroz svaki red u tabeli
+    for (var i = 0; i < tabela.rows.length; i++) {
+        var red = tabela.rows[i];
+
+        // Uzimamo vrednost cene iz četvrtog stupca (indeks 3)
+        var cena = parseFloat(red.cells[3].textContent);
+
+        // Dodajemo vrednost cene na ukupan iznos
+        ukupanIznos += cena;
+    }
+
+    // Prikazujemo rezultat u paragrafu
+    var paragraf = document.getElementById("ukupan-iznos");
+    paragraf.textContent = "Ukupna zarada je: " + ukupanIznos.toFixed(2);
 </script>
 </body>
 </html>

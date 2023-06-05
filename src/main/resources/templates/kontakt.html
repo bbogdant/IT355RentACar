@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kontakt</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+        }
+
+
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Rent A Car</a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+                <a class="nav-link" th:if="${isUser || user == null}"  href="/">Početna</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" th:if="${isUser}" th:href="@{/rezervacije/moje-rezervacije}" method="get"> Moje Rezervacije</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:if="${isAdmin}" th:href="@{/}">Početna</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/kontakt}" method="get">Kontakt</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" th:if="${user == null}"  th:href="@{/login}" >Login</a>
+            </li>
+            <li class="nav-item">
+                <a  class="nav-link" th:if="${user != null}" th:href="@{/logout}">Logout</a>
+            </li>
+
+
+
+        </ul>
+
+
+    </div>
+</nav>
+
+<div class="container mt-5">
+    <h1>Kontaktirajte nas</h1>
+    <div class="row mt-4">
+        <div class="col-lg-6">
+            <h4>Adresa</h4>
+            <p>123 Ulica, Grad, Zemlja</p>
+
+            <h4>Broj telefona</h4>
+            <p>Fiksni: +123456789</p>
+            <p>Mobilni: +987654321</p>
+        </div>
+        <div class="col-lg-6">
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function initMap() {
+        var myLatLng = {lat: 40.7128, lng: -74.0060}; // Postavite koordinate lokacije
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            zoom: 12
+        });
+
+        var marker = new google.maps.Marker({
+            map: map,
+            position: myLatLng,
+            title: 'Rent-a-Car'
+        });
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+</body>
+</html>

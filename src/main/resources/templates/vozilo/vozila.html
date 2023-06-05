@@ -98,7 +98,12 @@
             <td th:text="${vozilo.tip}"></td>
 
             <td><a th:href="@{/vozila/edit-vozilo/{id}(id=${vozilo.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-            <td><a th:href="@{/vozila/delete-vozilo/{id}(id=${vozilo.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+
+            <form th:action="@{/vozila/delete-vozilo/{id}(id=${vozilo.id})}" method="post">
+                <td><button  class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></button></td>
+
+            </form>
+
 
         </tr>
 

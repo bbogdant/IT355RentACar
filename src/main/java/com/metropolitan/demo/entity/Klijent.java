@@ -18,8 +18,6 @@ public class Klijent {
     @Column(name = "klijent_id", nullable = false)
     private Integer id;
 
-
-
     @Column(name = "ime")
     private String ime;
 

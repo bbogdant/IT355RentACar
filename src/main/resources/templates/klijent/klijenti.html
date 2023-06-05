@@ -78,7 +78,10 @@
             <td th:text="${klijent.email}"></td>
             <td th:text="${klijent.role}"></td>
             <td><a th:href="@{/klijenti/edit/{id}(id=${klijent.id})}" class="btn btn-primary"><i class="fas fa-user-edit ml-2"></i></a></td>
-            <td><a th:href="@{/klijenti/delete/{id}(id=${klijent.id})}" class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></a></td>
+            <form th:href="@{/klijenti/delete/{id}(id=${klijent.id})}" method="post">
+                <td><button  class="btn btn-primary"><i class="fas fa-user-times ml-2"></i></button></td>
+            </form>
+
         </tr>
         </tbody>
         <a class="btn mt-3" th:href="@{/klijenti/signup}">Dodaj Klijenta</a>

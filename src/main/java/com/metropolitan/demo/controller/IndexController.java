@@ -64,9 +64,9 @@ public class IndexController {
         return "/login";
     }
 
-    @GetMapping("/home")
+    @GetMapping("/kontakt")
     public String openAdminPanel(){
-        return "/admin/home";
+        return "/kontakt";
     }
 
 

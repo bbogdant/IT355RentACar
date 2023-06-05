@@ -26,15 +26,17 @@ public class WebSecurityConf {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers( "/", "/klijenti/signup","/sortiraj", "/pretraga/**", "/detalji").permitAll()
+                .antMatchers( "/", "/klijenti/signup","/sortiraj", "/pretraga/**", "/detalji", "/kontakt").permitAll()
                 .antMatchers(HttpMethod.GET,"/rezervacije").hasAuthority("Admin")
-                .antMatchers("/klijenti").hasAuthority("Admin")
-                .antMatchers("/vozila/**").hasAuthority("Admin")
-                .antMatchers("/transakcije").hasAuthority("Admin")
-                .antMatchers("/home").hasAuthority("Admin")
+                .antMatchers(HttpMethod.GET,"/klijenti").hasAuthority("Admin")
+                .antMatchers(HttpMethod.GET,"/vozila").hasAuthority("Admin")
+                .antMatchers(HttpMethod.GET,"/transakcije").hasAuthority("Admin")
 
 
-                .antMatchers("/nova-rezervacija").hasAuthority("User")
+                .antMatchers(HttpMethod.GET,"/nova-rezervacija").hasAuthority("User")
+                .antMatchers(HttpMethod.POST,"/delete-rezervacija").hasAuthority("User")
+                .antMatchers(HttpMethod.GET,"/moje-rezervacije").hasAuthority("User")
+
 
 
 

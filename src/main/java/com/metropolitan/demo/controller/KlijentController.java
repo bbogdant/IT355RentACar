@@ -3,7 +3,6 @@ package com.metropolitan.demo.controller;
 
 
 import com.metropolitan.demo.entity.Klijent;
-import com.metropolitan.demo.repository.KlijentRepository;
 import com.metropolitan.demo.service.KlijentService;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +26,7 @@ public class KlijentController {
 		return "klijent/klijenti";
 	}
 
-//	@GetMapping("/{klijentId}")
-//	public String getKlijentById(@PathVariable Integer klijentId, Model model) {
-//		Klijent klijent = klijentService.findById(klijentId);
-//		model.addAttribute("klijent", klijent);
-//		return "rezervacija/rezervacija";
-//	}
+
 
 	@GetMapping("klijenti/signup")
 	public String showSignUpForm(Model model) {

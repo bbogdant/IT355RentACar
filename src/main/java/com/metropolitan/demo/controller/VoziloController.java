@@ -32,20 +32,14 @@ public class VoziloController {
 		return "rezervacija/dodaj-rezervaciju";
 	}
 
-//	@GetMapping("/{voziloId}")
-//	public String getVozilaById(@PathVariable Integer voziloId, Model model) {
-//		Vozilo vozilo = voziloService.findById(voziloId);
-//		model.addAttribute("vozilo", vozilo);
-//		return "vozila";
-//	}
 
-	@GetMapping("/vozila/sortiraj-po-ceni")
-	public String sortirajPoCeni(Model model) {
-		List<Vozilo> vozila = voziloService.findAll();
-		vozila = voziloService.sortByPrica(vozila);
-		model.addAttribute("vozila", vozila);
-		return "vozilo/vozila";
-	}
+//	@GetMapping("/vozila/sortiraj-po-ceni")
+//	public String sortirajPoCeni(Model model) {
+//		List<Vozilo> vozila = voziloService.findAll();
+//		vozila = voziloService.sortByPrica(vozila);
+//		model.addAttribute("vozila", vozila);
+//		return "vozilo/vozila";
+//	}
 
 	@GetMapping("/vozila/search")
 	public String pronadjiVozilaPoModelu(@RequestParam("marka") String marka, Model model) {
@@ -64,7 +58,7 @@ public class VoziloController {
 	}
 
 	@PostMapping("vozila/dodaj-vozilo")
-	public String addVozilo(@Valid Vozilo vozilo, BindingResult result, Model model) {
+	public String addVozilo(@Valid Vozilo vozilo, BindingResult result) {
 		if (result.hasErrors()) {
 			return "vozilo/dodaj-vozilo";
 		}

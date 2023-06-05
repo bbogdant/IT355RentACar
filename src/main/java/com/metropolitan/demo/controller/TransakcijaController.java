@@ -1,7 +1,7 @@
 package com.metropolitan.demo.controller;
 
 
-import com.metropolitan.demo.entity.Klijent;
+
 import com.metropolitan.demo.entity.Rezervacija;
 import com.metropolitan.demo.entity.Transakcija;
 import com.metropolitan.demo.entity.Vozilo;
@@ -20,7 +20,6 @@ import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Controller
@@ -38,27 +37,9 @@ public class TransakcijaController {
 		return "transakcija";
 	}
 
-//	@GetMapping("/{transakcijaId}")
-//	public String getTransakcijaById(@PathVariable Integer transakcijaId, Model model) {
-//		Transakcija transakcija = transakcijaService.findById(transakcijaId);
-//
-//		if (transakcija == null) {
-//			return "transakcija-not-found";
-//		}
-//
-//		model.addAttribute("transakcija", transakcija);
-//		return "transakcija-details";
-//	}
-
-//	@GetMapping("transakcije/plati-form")
-//	public String showPlatiForm(Model model) {
-//		Transakcija transakcija = new Transakcija();
-//		model.addAttribute("transakcija", transakcija);
-//		return "transakcija/plati-form";
-//	}
 
 	@PostMapping("transakcije/plati")
-	public String addTransakcija(@RequestParam("rezervacijaId") Integer rezervacijaId, @RequestParam("voziloId") Integer voziloId, @Valid Transakcija transakcija, BindingResult result, Model model) {
+	public String addTransakcija(@RequestParam("rezervacijaId") Integer rezervacijaId, @RequestParam("voziloId") Integer voziloId, @Valid Transakcija transakcija, BindingResult result) {
 
 		if (result.hasErrors()) {
 			return "rezervacija/moje-rezervacije";

@@ -7,8 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-
 import java.util.List;
 
 @Controller
@@ -49,15 +47,6 @@ public class IndexController {
         return "index";
     }
 
-//    @GetMapping("/new-rezervacija")
-//    public String showCreateRezervacijaForm(Model model) {
-//        List<Vozilo> markeVozila = voziloService.findAll();
-//        Rezervacija rezervacija = new Rezervacija();
-//        model.addAttribute("rezervacija", rezervacija);
-//        model.addAttribute("vozila", markeVozila);
-//        return "rezervacija/dodaj-rezervaciju";
-//    }
-
     @GetMapping("/login")
     public String showLoginForm(Model model){
 
@@ -76,8 +65,6 @@ public class IndexController {
         model.addAttribute("vozilo", vozilo);
         return "vozilo/detalji";
     }
-
-
 
 
 }

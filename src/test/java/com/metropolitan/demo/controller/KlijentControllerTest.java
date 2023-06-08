@@ -73,14 +73,14 @@ class KlijentControllerTest {
 
         Integer klijentId = 1;
         Klijent mockKlijent = new Klijent();
-        // Set up any required fields for the mockKlijent object
+
 
         when(klijentService.findById(klijentId)).thenReturn(mockKlijent);
 
-        // Call the method under test
+
         String result = klijentController.showUpdateForm(klijentId, model);
 
-        // Verify the method behavior
+
         verify(model).addAttribute("klijent", mockKlijent);
         assertEquals("klijent/update-klijent", result);
     }

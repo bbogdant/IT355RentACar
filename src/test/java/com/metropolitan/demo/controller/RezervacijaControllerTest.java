@@ -67,14 +67,14 @@ class RezervacijaControllerTest {
 
 
 
-            // Mock the required dependencies and data
+
             List<Rezervacija> mockRezervacije = List.of(new Rezervacija(), new Rezervacija());
             when(rezervacijaService.findAllByLoggedInMember()).thenReturn(mockRezervacije);
 
-            // Call the method under test
+
             String result = rezervacijaController.getMyPurchasesPage(model);
 
-            // Verify the method behavior
+
             verify(model).addAttribute("transakcija", new Transakcija());
             verify(model).addAttribute("mojeRezervacije", mockRezervacije);
 

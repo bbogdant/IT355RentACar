@@ -32,15 +32,15 @@ class VoziloControllerTest {
 
     @Test
     void testGetAllVozila() {
-        // Arrange
+
         List<Vozilo> mockVozila = Arrays.asList(new Vozilo(), new Vozilo());
         when(voziloService.findAll()).thenReturn(mockVozila);
         Model model = mock(Model.class);
 
-        // Act
+
         String result = voziloController.getAllVozila(model);
 
-        // Assert
+
         assertEquals("vozilo/vozila", result);
         verify(voziloService, times(1)).findAll();
         verify(model, times(1)).addAttribute("vozila", mockVozila);
@@ -51,15 +51,15 @@ class VoziloControllerTest {
 
     @Test
     void testAddVozilo() {
-        // Arrange
+
         Vozilo vozilo = new Vozilo();
         BindingResult bindingResult = mock(BindingResult.class);
 
 
-        // Act
+
         String result = voziloController.addVozilo(vozilo, bindingResult);
 
-        // Assert
+
         assertEquals("redirect:/vozila", result);
         verify(voziloService, times(1)).save(vozilo);
 
@@ -68,15 +68,15 @@ class VoziloControllerTest {
 
     @Test
     void saveVozila() {
-        // Arrange
+
         Vozilo vozilo = new Vozilo();
         BindingResult bindingResult = mock(BindingResult.class);
         RedirectAttributes redirectAttributes = mock(RedirectAttributes.class);
 
-        // Act
+
         String result = voziloController.saveVozila(vozilo);
 
-        // Assert
+
         verify(voziloService, times(1)).save(vozilo);
         assertEquals("redirect:/vozila", result);
     }

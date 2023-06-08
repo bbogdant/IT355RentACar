@@ -70,6 +70,72 @@
     </div>
 </div>
 
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <h4>O nama</h4>
+                <ul class="footer-links list-unstyled">
+                    <li class="nav-item">
+                        <a class="nav-link" th:if="${isUser}" th:href="@{/rezervacije/moje-rezervacije}" method="get"> Moje Rezervacije</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  th:href="@{/}">Početna</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/kontakt}" method="get">Kontakt</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4>Kategorije</h4>
+                <ul class="footer-links list-unstyled">
+                    <li class="nav-item">
+                        <a class="nav-link" th:if="${isUser}" th:href="@{/rezervacije/moje-rezervacije}" method="get"> Moje Rezervacije</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  th:href="@{/}">Početna</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/kontakt}" method="get">Kontakt</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4>Korisni linkovi</h4>
+                <ul class="footer-links list-unstyled">
+                    <li class="nav-item">
+                        <a class="nav-link" th:if="${isUser}" th:href="@{/rezervacije/moje-rezervacije}" method="get"> Moje Rezervacije</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"  th:href="@{/}">Početna</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/kontakt}" method="get">Kontakt</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <h4>Kontakt</h4>
+                <p>
+                    Adresa: Nis 123 Srbija
+                    Radno vreme: 9-5
+                    Broj telefona: 123-2345
+                </p>
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="footer-bottom">
+                    <p>Bogdan Trajkovic 4405 &copy; 2023</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
 <script>
     function initMap() {
         var myLatLng = {lat: 40.7128, lng: -74.0060};

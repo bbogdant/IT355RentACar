@@ -27,8 +27,6 @@ class IndexControllerTest {
     @Mock
     private VoziloRepository voziloRepository;
 
-    @InjectMocks
-    private VoziloController voziloController;
 
     @InjectMocks
     private IndexController indexController;

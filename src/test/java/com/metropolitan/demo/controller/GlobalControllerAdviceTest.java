@@ -46,7 +46,6 @@ class GlobalControllerAdviceTest {
 
     @Test
     void isUser() {
-
         when(klijentService.isUserUser()).thenReturn(true);
         boolean result = globalControllerAdvice.isUser();
         assertEquals(true, result);
@@ -54,8 +53,6 @@ class GlobalControllerAdviceTest {
 
     @Test
     void getLoggedInUser() {
-
-
         Klijent expectedUser = new Klijent();
         when(klijentService.getLoggedInUser()).thenReturn(expectedUser);
         Klijent result = globalControllerAdvice.getLoggedInUser();

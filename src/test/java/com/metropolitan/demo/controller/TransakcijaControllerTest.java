@@ -38,10 +38,10 @@ class TransakcijaControllerTest {
         when(transakcijaService.findAll()).thenReturn(mockTransakcija);
         Model model = mock(Model.class);
 
-        // Act
+
         String result = transakcijaController.getAllTransakcije(model);
 
-        // Assert
+
         assertEquals("transakcija", result);
         verify(transakcijaService, times(1)).findAll();
         verify(model, times(1)).addAttribute("transakcije", mockTransakcija);
